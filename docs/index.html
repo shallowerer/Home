@@ -62,29 +62,34 @@
 <body>
     <div id="app">
         <button :title="msg" @click="show()">效果展示</button>
-        <button :title="msg" @click="show()">暂停</button>
-        <h3 v-cloak>{{msg}}</h3>
+        <button :title="msg" @click="stop()">暂停</button>
+        <h3>{{msg}}</h3>
+        
     </div>
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: '欢迎访问求源丶的空间！！'
+                msg: '欢迎访问求源丶的空间！！',
+                intervalId: null
             },
             methods: {
                 show() {
-                    setInterval(() => { //箭头函数没有自己的this，此this指向上
+                    if(this.intervalId != null) return;
+                    this.intervalId = setInterval(() => { //箭头函数没有自己的this，此this指向上
                         var start = this.msg.substring(0, 1);
                         var end = this.msg.substring(1);
                         this.msg = end + start;
-                    },200);
+                    }, 200);
                     //vm实例会自动监听自身数据的改变，数据一旦改变，就自动吧data 中的数据自动更新到页面中去
                     //好处：程序员只需关心数据，不需考虑如何重新渲染页面
-
+                },
+                stop(){
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
                 }
             }
-        });
+        }); 
     </script>
 </body>
-
 </html>
