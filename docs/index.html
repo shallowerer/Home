@@ -12,6 +12,9 @@
         body{
             background-color: aqua;
         }
+        [v-cloak] {
+            dispaly: none;
+        }
     </style>
 
 </head>
@@ -20,7 +23,7 @@
     <div id="app">
         <button :title="msg" @click="show()">效果展示</button>
         <button :title="msg" @click="show()">暂停</button>
-        <h3>{{msg}}</h3>
+        <h3 v-cloak>{{msg}}</h3>
     </div>
     <script>
         var vm = new Vue({
